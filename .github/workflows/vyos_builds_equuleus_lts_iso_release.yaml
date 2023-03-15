@@ -51,6 +51,7 @@ jobs:
     - name: Create checksum and add to changelog
       run: |
         SHA256SUM=`sha256sum vyos-build/build/vyos-${{ env.RELEASE_VERSION }}-amd64.iso`
+        echo "VyOS ${{ env.RELEASE_VERSION }} LTS" >> ./RELEASE_CHANGELOG
         echo -e "\n#### SHA256 Checksum\n\`\`\`\n$SHA256SUM\n" >> ./RELEASE_CHANGELOG
         echo -e "$SHA256SUM" > ./checksums.txt
 
@@ -62,8 +63,6 @@ jobs:
       with:
         tag_name: ${{ env.RELEASE_VERSION }}
         release_name: VyOS ${{ env.RELEASE_VERSION }} LTS
-        body: |
-          VyOS ${{ env.RELEASE_VERSION }} LTS
         draft: false
         prerelease: false
         body_path: ./RELEASE_CHANGELOG
