@@ -50,7 +50,7 @@ jobs:
 
     - name: Create checksum and add to changelog
       run: |
-        SHA256SUM=`sha256sum vyos-build/build/vyos-${{ env.RELEASE_VERSION }}-amd64.iso`
+        SHA256SUM=`cd vyos-build/build/ && sha256sum vyos-${{ env.RELEASE_VERSION }}-amd64.iso`
         echo "VyOS ${{ env.RELEASE_VERSION }} LTS" >> ./RELEASE_CHANGELOG
         echo -e "\n#### SHA256 Checksum\n\`\`\`\n$SHA256SUM" >> ./RELEASE_CHANGELOG
         echo -e "$SHA256SUM" > ./checksums.txt
