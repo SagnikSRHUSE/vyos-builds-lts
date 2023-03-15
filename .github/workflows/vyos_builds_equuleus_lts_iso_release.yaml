@@ -1,4 +1,4 @@
-name: VyOS LTS ISO Builds
+name: VyOS Equuleus LTS ISO Builds
 
 on:
   workflow_dispatch: {}
