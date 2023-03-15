@@ -12,13 +12,13 @@ jobs:
     container:
       env:
         TZ: Etc/UTC
-        BUILD_VERSION: equuleus
       image: vyos/vyos-build:equuleus
       options: --privileged --sysctl net.ipv6.conf.lo.disable_ipv6=0
 
     steps:
     - name: Set env
       run: |
+        echo "BUILD_VERSION=equuleus" >> $GITHUB_ENV 
         echo "RELEASE_VERSION=$BUILD_VERSION-$(date +%F)" >> $GITHUB_ENV 
 
     - name: Clone source repository
