@@ -19,7 +19,7 @@ jobs:
     - name: Set env
       run: |
         echo "BUILD_VERSION=equuleus" >> $GITHUB_ENV 
-        echo "RELEASE_VERSION=$BUILD_VERSION-$(date +%F)" >> $GITHUB_ENV 
+        echo "RELEASE_VERSION=${{ env.BUILD_VERSION }}-$(date +%F)" >> $GITHUB_ENV 
 
     - name: Show vars
       run: |
@@ -33,7 +33,7 @@ jobs:
     - name: Customize
       working-directory: vyos-build
       run: |
-        ./configure \
+        echo ./configure \
         --architecture amd64 \
         --build-by "sagnik@ambyre.net" \
         --build-type release \
