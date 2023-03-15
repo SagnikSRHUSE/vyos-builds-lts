@@ -23,12 +23,7 @@ jobs:
     - name: Set release version
       run: |        
         echo "RELEASE_VERSION=${{ env.BUILD_VERSION }}-$(date +%F)" >> $GITHUB_ENV 
-
-    - name: Show vars
-      run: |
-        echo ${{ env.RELEASE_VERSION }}
-        echo ${{ env.BUILD_VERSION }}
-        
+     
     - name: Clone source repository
       run: |
         git clone -b ${{ env.BUILD_VERSION }} --single-branch https://github.com/vyos/vyos-build
@@ -36,7 +31,7 @@ jobs:
     - name: Customize
       working-directory: vyos-build
       run: |
-        echo ./configure \
+        ./configure \
         --architecture amd64 \
         --build-by "sagnik@ambyre.net" \
         --build-type release \
@@ -47,6 +42,12 @@ jobs:
       run: |
         make iso
 
+    - name: List artifacts
+      run: |
+        ls -lah
+        ls -lah vyos-build/
+        ls -lah vyos-build/build/
+        
     - name: Create release
       id: create_release
       uses: actions/create-release@master
