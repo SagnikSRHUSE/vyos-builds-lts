@@ -3,8 +3,8 @@ name: VyOS LTS ISO Builds
 on:
   workflow_dispatch: {}
   push:
-    tags:
-      - '*'
+    branches:
+      - main
 
 jobs:
   build-and-release:
@@ -13,7 +13,7 @@ jobs:
       env:
         TZ: Etc/UTC
         BUILD_VERSION: equuleus
-      image: vyos/vyos-build:${{ env.BUILD_VERSION }}
+      image: vyos/vyos-build:equuleus
       options: --privileged --sysctl net.ipv6.conf.lo.disable_ipv6=0
 
     steps:
@@ -23,7 +23,7 @@ jobs:
 
     - name: Clone source repository
       run: |
-        git clone -b equuleus --single-branch https://github.com/vyos/vyos-build
+        git clone -b ${{ env.BUILD_VERSION }} --single-branch https://github.com/vyos/vyos-build
 
     - name: Customize
       working-directory: vyos-build
