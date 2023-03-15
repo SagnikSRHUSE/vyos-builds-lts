@@ -21,6 +21,11 @@ jobs:
         echo "BUILD_VERSION=equuleus" >> $GITHUB_ENV 
         echo "RELEASE_VERSION=$BUILD_VERSION-$(date +%F)" >> $GITHUB_ENV 
 
+    - name: Show vars
+      run: |
+        echo ${{ env.RELEASE_VERSION }}
+        echo ${{ env.BUILD_VERSION }}
+        
     - name: Clone source repository
       run: |
         git clone -b ${{ env.BUILD_VERSION }} --single-branch https://github.com/vyos/vyos-build
