@@ -1,6 +1,7 @@
 name: VyOS LTS ISO Builds
 
 on:
+  workflow_dispatch: {}
   push:
     tags:
       - '*'
