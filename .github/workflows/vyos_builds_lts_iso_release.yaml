@@ -10,15 +10,16 @@ jobs:
   build-and-release:
     runs-on: ubuntu-latest
     container:
-      image: vyos/vyos-build:equuleus
       env:
         TZ: Etc/UTC
+        BUILD_VERSION: equuleus
+      image: vyos/vyos-build:${{ env.BUILD_VERSION }}
       options: --privileged --sysctl net.ipv6.conf.lo.disable_ipv6=0
 
     steps:
-    - name: Set release version
+    - name: Set env
       run: |
-        echo "RELEASE_VERSION=${GITHUB_REF:10}" >> $GITHUB_ENV
+        echo "RELEASE_VERSION=$BUILD_VERSION-$(date +%F)" >> $GITHUB_ENV 
 
     - name: Clone source repository
       run: |
@@ -45,7 +46,7 @@ jobs:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       with:
         tag_name: ${{ github.ref }}
-        release_name: VyOS ${{ github.ref }} LTS
+        release_name: VyOS ${{ env.RELEASE_VERSION }} LTS
         body: |
           VyOS ${{ env.RELEASE_VERSION }} LTS
         draft: false
