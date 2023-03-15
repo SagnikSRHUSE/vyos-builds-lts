@@ -58,4 +58,4 @@ jobs:
         upload_url: ${{ steps.create_release.outputs.upload_url }}
         asset_path: vyos-build/build/vyos-${{ env.RELEASE_VERSION }}-amd64.iso
         asset_name: vyos-${{ env.RELEASE_VERSION }}-amd64.iso
-        asset_content_type: application/octet-stream
+        asset_content_type: application/x-iso9660-image
